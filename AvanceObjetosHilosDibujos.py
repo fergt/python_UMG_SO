@@ -25,6 +25,7 @@ ventana.resizable(0,0)
 canvas = Canvas(master = ventana, width = 850, height = 450)
 canvas.pack()
 
+#se crea variable para llamar el screen y utilizar el canvas
 screen = TurtleScreen(canvas)
 
 # turtle que hace las lineas
@@ -94,6 +95,7 @@ def competir(id):
     #variable para el manejo de aleatorio para avance de objeto
     aleatorio= [10,40]
 
+    # si el id del hilo es el mismo entra
     if id == 1:
         for turn in range(20):
             r.forward(random.choice(aleatorio))
@@ -115,6 +117,7 @@ def competir(id):
             time.sleep(1)
             n.penup()
 
+    # compara la posición x para determinar quien finaliza en una mayor posición e indicar el ganador o si finaliza en empate.
     if r.xcor() > a.xcor() and r.xcor() > n.xcor():
         messagebox.showinfo(message='Ganó - Goku')
         logging.info("Ejecutado para el id " +str(id))
@@ -130,10 +133,11 @@ def competir(id):
                 logging.info("Ejecutado para el id " +str(id))
                 #print('gana Negro')
             else:
+                # si son iguales en almenos dos muestra empate
                 if r.xcor() == a.xcor() or r.xcor()== n.xcor() or a.xcor() == n.xcor() or n.xcor() == r.xcor():
                     messagebox.showerror(message='Empate!')
     
-
+# funcion que inicia los hilos.
 def iniciar():
     t1 = threading.Thread(name="hilo_1", target=competir, args=(1, ))
     t2 = threading.Thread(name="hilo_2", target=competir, args=(2, ))
@@ -142,6 +146,7 @@ def iniciar():
     t2.start()
     t3.start()
 
+#muestra en otra ventana a los estudiantes
 def estudiantes():  
     ventanados=Tk()
     ventanados.geometry("400x200")
@@ -157,6 +162,7 @@ def estudiantes():
 
 reiniciar()
 
+#definicion de botones
 salir = ttk.Button(master=ventana, text='Salir', command=ventana.destroy,  width=3)
 salir.pack(side=LEFT)
 
